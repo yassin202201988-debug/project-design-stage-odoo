@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_report_project_design_stage" model="ir.actions.report">
+        <field name="name">Project Design Stage Summary</field>
+        <field name="model">project.project</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">project_design_stage.report_project_design_stage_document</field>
+        <field name="print_report_name">'Design Stage - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="project.model_project_project"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_project_design_stage_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <div style="background-color: #f8f7ff; border-radius: 10px; padding: 28px 32px; margin-bottom: 24px; border-left: 6px solid #714B67;">
+                            <h1 style="margin: 0 0 6px 0; color: #2c2c2c; font-size: 30px;">
+                                <span t-field="doc.name"/>
+                            </h1>
+                            <div style="font-size: 13px; color: #8f8f8f; letter-spacing: 0.5px; text-transform: uppercase;">
+                                Design Project Summary
+                            </div>
+
+                            <div style="margin-top: 18px;">
+                                <t t-if="doc.design_stage == 'concept'">
+                                    <span style="background-color: #6c757d; color: white; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: bold;">
+                                        ● CONCEPT
+                                    </span>
+                                </t>
+                                <t t-if="doc.design_stage == 'draft'">
+                                    <span style="background-color: #f0ad4e; color: white; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: bold;">
+                                        ● DRAFT
+                                    </span>
+                                </t>
+                                <t t-if="doc.design_stage == 'client_review'">
+                                    <span style="background-color: #5bc0de; color: white; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: bold;">
+                                        ● CLIENT REVIEW
+                                    </span>
+                                </t>
+                                <t t-if="doc.design_stage == 'approved'">
+                                    <span style="background-color: #5cb85c; color: white; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: bold;">
+                                        ● APPROVED
+                                    </span>
+                                </t>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-bottom: 24px;">
+                            <div class="col-6" style="padding-right: 20px;">
+                                <div style="font-size: 11px; color: #8f8f8f; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Customer</div>
+                                <div style="font-size: 15px; font-weight: 600; margin-bottom: 18px;"><span t-field="doc.partner_id"/></div>
+
+                                <div style="font-size: 11px; color: #8f8f8f; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Project Manager</div>
+                                <div style="font-size: 15px; font-weight: 600;"><span t-field="doc.user_id"/></div>
+                            </div>
+                            <div class="col-6" style="padding-left: 20px; border-left: 1px solid #e8e8e8;">
+                                <div style="font-size: 11px; color: #8f8f8f; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Planned Start</div>
+                                <div style="font-size: 15px; font-weight: 600; margin-bottom: 18px;"><span t-field="doc.date_start"/></div>
+
+                                <div style="font-size: 11px; color: #8f8f8f; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">Planned End</div>
+                                <div style="font-size: 15px; font-weight: 600;"><span t-field="doc.date"/></div>
+                            </div>
+                        </div>
+
+                        <t t-if="doc.tag_ids">
+                            <div style="margin-bottom: 24px;">
+                                <div style="font-size: 11px; color: #8f8f8f; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Tags</div>
+                                <t t-foreach="doc.tag_ids" t-as="tag">
+                                    <span style="background-color: #eeeeee; color: #444; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-right: 6px;">
+                                        <span t-field="tag.name"/>
+                                    </span>
+                                </t>
+                            </div>
+                        </t>
+
+                        <t t-if="doc.description">
+                            <div style="margin-top: 12px; padding-top: 16px; border-top: 1px solid #e8e8e8;">
+                                <div style="font-size: 11px; color: #8f8f8f; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Description</div>
+                                <div style="font-size: 13px; line-height: 1.6; color: #333;" t-field="doc.description"/>
+                            </div>
+                        </t>
+
+                        <div style="margin-top: 40px; padding-top: 12px; border-top: 1px solid #e8e8e8; font-size: 10px; color: #aaaaaa; text-align: center;">
+                            Generated on <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

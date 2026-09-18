@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_project_project_form_design_stage" model="ir.ui.view">
+        <field name="name">project.project.form.design.stage</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object" name="action_view_design_stage" icon="fa-flag">
+                    <field name="design_stage" widget="statinfo" string="Design Stage"/>
+                </button>
+                <button class="oe_stat_button" type="object" name="action_view_checklist" icon="fa-check-square-o">
+                    <div class="o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="design_checklist_done_count"/> / <field name="design_checklist_total_count"/>
+                        </span>
+                        <span class="o_stat_text">Checklist</span>
+                    </div>
+                </button>
+            </xpath>
+            <field name="user_id" position="after">
+                <field name="design_stage" widget="statusbar" options="{'clickable': '1'}"/>
+            </field>
+            <xpath expr="//notebook" position="inside">
+                <page string="Design Checklist" name="design_checklist">
+                    <field name="design_checklist_ids">
+                        <tree editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="stage"/>
+                            <field name="is_done"/>
+                            <field name="attachment_id"/>
+                            <field name="note"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_project_design_board_kanban" model="ir.ui.view">
+        <field name="name">project.project.kanban.design.board</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="design_stage" class="o_kanban_small_column">
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="user_id"/>
+                <field name="design_stage"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click" style="padding: 12px;">
+                            <strong><field name="name"/></strong>
+                            <div t-if="record.partner_id.value" style="color: #888; font-size: 12px;">
+                                <field name="partner_id"/>
+                            </div>
+                            <div style="margin-top: 8px;">
+                                <field name="user_id" widget="many2one_avatar_user"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_project_design_board" model="ir.actions.act_window">
+        <field name="name">Design Board</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" ref="view_project_design_board_kanban"/>
+    </record>
+
+    <menuitem id="menu_project_design_board"
+              name="Design Board"
+              parent="project.menu_main_pm"
+              action="action_project_design_board"
+              sequence="15"/>
+</odoo>

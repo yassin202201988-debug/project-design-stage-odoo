@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_projects_design_stage" inherit_id="project.portal_my_projects">
+        <xpath expr="//td[hasclass('text-end')]" position="before">
+            <td>
+                <t t-if="project.design_stage == 'concept'">
+                    <span style="background-color: #6c757d; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">Concept</span>
+                </t>
+                <t t-if="project.design_stage == 'draft'">
+                    <span style="background-color: #f0ad4e; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">Draft</span>
+                </t>
+                <t t-if="project.design_stage == 'client_review'">
+                    <span style="background-color: #5bc0de; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">Client Review</span>
+                </t>
+                <t t-if="project.design_stage == 'approved'">
+                    <span style="background-color: #5cb85c; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: bold;">Approved</span>
+                </t>
+            </td>
+        </xpath>
+    </template>
+</odoo>

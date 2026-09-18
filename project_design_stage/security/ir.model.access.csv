@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_project_design_stage_user,project.project.design.stage.user,model_project_project,project.group_project_user,1,1,1,0
+access_project_design_checklist_item_user,project.design.checklist.item.user,model_project_design_checklist_item,project.group_project_user,1,1,1,1
+access_project_design_budget_line_user,project.design.budget.line.user,model_project_design_budget_line,project.group_project_user,1,0,0,0
+access_project_design_budget_line_manager,project.design.budget.line.manager,model_project_design_budget_line,group_design_manager,1,1,1,1

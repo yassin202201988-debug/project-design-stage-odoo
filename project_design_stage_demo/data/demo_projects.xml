@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- مشروع 1: Concept -->
+        <record id="demo_project_villa_renovation" model="project.project">
+            <field name="name">Villa Renovation</field>
+            <field name="partner_id" ref="base.res_partner_2"/>
+            <field name="design_stage">concept</field>
+        </record>
+
+        <record id="demo_checklist_villa_1" model="project.design.checklist.item">
+            <field name="project_id" ref="demo_project_villa_renovation"/>
+            <field name="name">Site survey uploaded</field>
+            <field name="stage">concept</field>
+            <field name="is_done">1</field>
+            <field name="note">Confirmed by client</field>
+        </record>
+        <record id="demo_checklist_villa_2" model="project.design.checklist.item">
+            <field name="project_id" ref="demo_project_villa_renovation"/>
+            <field name="name">Mood board approved</field>
+            <field name="stage">concept</field>
+            <field name="is_done">0</field>
+        </record>
+
+        <record id="demo_budget_villa_1" model="project.design.budget.line">
+            <field name="project_id" ref="demo_project_villa_renovation"/>
+            <field name="design_stage">concept</field>
+            <field name="planned_amount">5000</field>
+        </record>
+
+        <!-- مشروع 2: Draft -->
+        <record id="demo_project_retail_store" model="project.project">
+            <field name="name">Retail Store Fit-out</field>
+            <field name="partner_id" ref="base.res_partner_4"/>
+            <field name="design_stage">draft</field>
+        </record>
+
+        <record id="demo_checklist_retail_1" model="project.design.checklist.item">
+            <field name="project_id" ref="demo_project_retail_store"/>
+            <field name="name">Floor plan drafted</field>
+            <field name="stage">draft</field>
+            <field name="is_done">1</field>
+        </record>
+        <record id="demo_checklist_retail_2" model="project.design.checklist.item">
+            <field name="project_id" ref="demo_project_retail_store"/>
+            <field name="name">Material palette selected</field>
+            <field name="stage">draft</field>
+            <field name="is_done">1</field>
+        </record>
+        <record id="demo_checklist_retail_3" model="project.design.checklist.item">
+            <field name="project_id" ref="demo_project_retail_store"/>
+            <field name="name">Lighting plan reviewed</field>
+            <field name="stage">draft</field>
+            <field name="is_done">0</field>
+        </record>
+
+        <record id="demo_budget_retail_1" model="project.design.budget.line">
+            <field name="project_id" ref="demo_project_retail_store"/>
+            <field name="design_stage">draft</field>
+            <field name="planned_amount">12000</field>
+        </record>
+
+        <!-- مشروع 3: Client Review -->
+        <record id="demo_project_office_hq" model="project.project">
+            <field name="name">Corporate HQ Redesign</field>
+            <field name="partner_id" ref="base.res_partner_1"/>
+            <field name="design_stage">client_review</field>
+        </record>
+
+        <record id="demo_checklist_office_1" model="project.design.checklist.item">
+            <field name="project_id" ref="demo_project_office_hq"/>
+            <field name="name">3D renderings sent to client</field>
+            <field name="stage">client_review</field>
+            <field name="is_done">1</field>
+        </record>
+        <record id="demo_checklist_office_2" model="project.design.checklist.item">
+            <field name="project_id" ref="demo_project_office_hq"/>
+            <field name="name">Client feedback logged</field>
+            <field name="stage">client_review</field>
+            <field name="is_done">0</field>
+            <field name="note">Awaiting response since last week</field>
+        </record>
+
+        <record id="demo_budget_office_1" model="project.design.budget.line">
+            <field name="project_id" ref="demo_project_office_hq"/>
+            <field name="design_stage">client_review</field>
+            <field name="planned_amount">25000</field>
+        </record>
+
+        <!-- مشروع 4: Approved -->
+        <record id="demo_project_office_design" model="project.project">
+            <field name="name">Office Design</field>
+            <field name="partner_id" ref="base.res_partner_1"/>
+            <field name="design_stage">approved</field>
+        </record>
+
+        <record id="demo_checklist_office_design_1" model="project.design.checklist.item">
+            <field name="project_id" ref="demo_project_office_design"/>
+            <field name="name">Final design signed off</field>
+            <field name="stage">approved</field>
+            <field name="is_done">1</field>
+            <field name="note">Ready for execution</field>
+        </record>
+
+        <record id="demo_budget_office_design_1" model="project.design.budget.line">
+            <field name="project_id" ref="demo_project_office_design"/>
+            <field name="design_stage">approved</field>
+            <field name="planned_amount">8000</field>
+        </record>
+
+    </data>
+</odoo>
